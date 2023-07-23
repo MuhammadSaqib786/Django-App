@@ -1,0 +1,50 @@
+<!-- templates/product_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    .grid-item {
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+    .grid-item h1, .grid-item h2 {
+        color: #333;
+    }
+    .grid-item p {
+        color: #666;
+    }
+    .grid-item form {
+        display: flex;
+        flex-direction: column;
+    }
+    .grid-item form button {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="grid-container">
+    <div class="grid-item">
+        <h1>Add Product</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add product</button>
+        </form>
+    </div>
+    <div class="grid-item">
+        <h1>Products</h1>
+        {% for product in products %}
+            <h2><a href="{% url 'product_detail' product.id %}">{{ product.title }}</a></h2>
+            <p>{{ product.description }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

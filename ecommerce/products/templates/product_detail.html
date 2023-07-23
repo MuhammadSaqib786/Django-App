@@ -1,0 +1,12 @@
+<!-- templates/product_detail.html -->
+<h1>{{ product.title }}</h1>
+<p>Category: {{ product.category.name }}</p>
+<p>Description: {{ product.description }}</p>
+<img src="{{ product.image.url }}" alt="{{ product.title }}">
+<p>Price: {{ product.price }}</p>
+
+<h2>Reviews ({{ review_count }})</h2>
+{% for review in reviews %}
+    <p>Rating: {{ review.rating }}</p>
+    <p>Comment: {{ review.comment }}</p>
+{% endfor %}
